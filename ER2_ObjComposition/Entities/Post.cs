@@ -2,6 +2,7 @@
 
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Text;
 
 namespace ER2_ObjComposition.Entities
 {
@@ -28,12 +29,27 @@ namespace ER2_ObjComposition.Entities
 
         public override string ToString()
         {
-            string comments = "";
-            foreach(Comment item in Comments)
+            //string comments = "";
+            //foreach(Comment item in Comments)
+            //{
+            //    comments+= item+"\n";
+            //}
+            //return $"{Title}\n{Likes} Likes - {Date}\nComments:\n{comments}";
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(this.Title);
+            sb.Append(this.Likes);
+            sb.Append(" Likes - ");
+            sb.AppendLine(Date.ToString("dd/MM/yyyy HH:mm:ss"));
+            sb.AppendLine("Comments:");
+
+            foreach(Comment c in Comments)
             {
-                comments+= item+"\n";
+                sb.AppendLine(c.Text);
             }
-            return $"{Title}\n{Likes} Likes - {Date}\nComments:\n{comments}";
+
+            return sb.ToString();
+            
         }
     }
 }
