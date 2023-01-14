@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Enums_ER1.Entities.Enums;
-
+﻿using Enums_ER1.Entities.Enums;
 
 namespace Enums_ER1.Entities
 {
@@ -17,8 +10,6 @@ namespace Enums_ER1.Entities
         internal List<HourContract> Contracts { get; set; }
         internal Department _Department { get; set; }
         
-
-
         public Worker(string Name, WorkLevel Level, double BaseSalary, Department _Department)
         {
             this.Name = Name;

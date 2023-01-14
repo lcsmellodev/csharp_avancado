@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Enums_ER1.Entities.Enums
+﻿namespace Enums_ER1.Entities.Enums
 {
     enum WorkLevel : int
     {

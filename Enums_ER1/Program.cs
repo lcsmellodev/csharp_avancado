@@ -1,4 +1,6 @@
-﻿using Enums_ER1.Entities;
+﻿//Exercicio sobre composicao de objetos
+
+using Enums_ER1.Entities;
 using Enums_ER1.Entities.Enums;
 using System.Globalization;
 
@@ -10,7 +12,7 @@ string name = Console.ReadLine();
 Console.Write("Level (Junior/MidLevel/Senior): ");
 string level = Console.ReadLine();
 Console.Write("Base Salary: ");
-double salary = double.Parse(Console.ReadLine());
+double salary = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 Console.Write("How many contracts yo this worker?");
 int contracts_number = int.Parse(Console.ReadLine());
 
@@ -36,9 +38,9 @@ for(int i = 0; i < contracts_number; i++)
 }
 
 Console.Write("Enter month and year to calculate income (MM/YYYY): ");
-
 string incomeData = Console.ReadLine();
 double income = worker.Income(DateTime.ParseExact(incomeData, "MM/yyyy",CultureInfo.InvariantCulture).Year, DateTime.ParseExact(incomeData, "MM/yyyy", CultureInfo.InvariantCulture).Month);
+Console.WriteLine(worker);
 Console.WriteLine($"Income for {incomeData}: {income}");
 
 
