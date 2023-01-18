@@ -1,5 +1,4 @@
-﻿using link_revisao.Entities;
-using System.Runtime.CompilerServices;
+﻿using Linq_revisao.Entities;
 
 //funcao auxiliar
 static void Print<T>(string message, IEnumerable<T> collection)
