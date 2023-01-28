@@ -31,7 +31,14 @@ List<Product> products = new List<Product>() {
                 new Product() { Id = 11, Name = "Level", Price = 70.0, Category = c1 }
             };
 
-var r1 = products.Where(x => x.Category.Tier == 1 && x.Price < 900.00);
+//var r1 = products.Where(x => x.Category.Tier == 1 && x.Price < 900.00);
+
+// sintaxe alternativa
+
+var r1 =
+    from p in products
+    where p.Category.Tier == 1 && p.Price < 900.0
+    select p;
 
 Print("Produtos tier 1 e preço < 900.00", r1);
 
@@ -42,8 +49,21 @@ var r2 = products
 
 Print("Apenas nomes dos produtos que tem categoria Tools", r2);
 
-var r3 = products.Where(p => p.Name[0] == 'C').Select(p => new { p.Name, p.Price/*, CategoryName = p.Category.Name*/ }); 
+//var r3 = products.Where(p => p.Name[0] == 'C').Select(p => new { p.Name, p.Price/*, CategoryName = p.Category.Name*/ }); 
 // o ultimo parametro é uma maneira de fazer o alias. Se não o fizer vai dar erro de compilação porque p nome é igual
+
+
+//sintaxe alternativa
+var r3 =
+    from p in products
+    where p.Name[0] == 'C'
+    select new
+    {
+        p.Name,
+        p.Price,
+        CategoryName = p.Category.Name
+    };
+
 Print("Nomes começados com 'C' e objeto anônimo", r3);
 
 var r4 = products.Where(p => p.Category.Tier == 1)
@@ -52,7 +72,10 @@ var r4 = products.Where(p => p.Category.Tier == 1)
 
 Print("Filtra os tier 1, ordena primeiramente por preço e, segundamente, por nome", r4);
 
-var r5 = r4.Skip(2).Take(4);
+//var r5 = r4.Skip(2).Take(4);
+var r5 =
+    (from p in r4
+     select p).Skip(2).Take(4);
 
 Print("Pula os 2 primeiros e então pega 4 elementos", r4);
 
@@ -76,4 +99,3 @@ Console.WriteLine("Max price:" + r10);
 
 var r11 = products.Min(p => p.Price);
 
-//     
