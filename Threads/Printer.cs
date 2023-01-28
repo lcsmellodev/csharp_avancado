@@ -10,8 +10,8 @@ namespace Threads
     {
         public void PrintNumbers()
         {
-            //lock (this)
-            //{
+            lock (this)
+            {
                 for (int i = 0; i < 5; i++)
                 {
                     Thread.Sleep(1000);
@@ -19,7 +19,7 @@ namespace Threads
                 }
                 
                 Console.WriteLine();
-            //}
+            }
            
         }
     }
