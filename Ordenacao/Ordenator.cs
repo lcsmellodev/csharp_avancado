@@ -23,20 +23,20 @@ namespace Ordenacao
             {
                 for (i = j; i > 0 && Entrada[i] < Entrada[i - 1]; i--)
                 {
-                    int[] iteracao = TrocarValores(Entrada, i, i - 1);
+                    int[] iteracao = TrocarValores(i, i - 1);
                     PrintArray(iteracao);
                 }
             }
             return Entrada;
         }
 
-        internal int[] TrocarValores(int[] Dados, int m, int n)
+        internal int[] TrocarValores(int m, int n)
         {
             int temp;
-            temp = Dados[m];
-            Dados[m] = Dados[n];
-            Dados[n] = temp;
-            return Dados;
+            temp = Entrada[m];
+            Entrada[m] = Entrada[n];
+            Entrada[n] = temp;
+            return Entrada;
         }
 
         internal void PrintArray(int[] array)
@@ -48,5 +48,4 @@ namespace Ordenacao
             }
         }
     }
-
 }
