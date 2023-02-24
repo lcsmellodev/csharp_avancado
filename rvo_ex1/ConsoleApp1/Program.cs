@@ -1,70 +1,102 @@
 ﻿using System;
 
-namespace ConsoleApp1
+class MergeSort
 {
-    class Program
+
+    public int Trocas = 0;
+    void Merge(int[] arr, int l, int m, int r)
     {
-        static void Main(string[] args)
+
+        int n1 = m - l + 1;
+        int n2 = r - m;
+
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+        int i, j;
+
+        for (i = 0; i < n1; ++i)
+            L[i] = arr[l + i];
+        for (j = 0; j < n2; ++j)
+            R[j] = arr[m + 1 + j];
+
+        i = 0;
+        j = 0;
+
+        
+        int k = l;
+        while (i < n1 && j < n2)
         {
-            
-            string entrada = Console.ReadLine();
-            string[] entradaArray = entrada.Split();
-            int N = int.Parse(entradaArray[0]);
-
-            while(N != 0)
+            if (L[i] <= R[j])
             {
-                string[] elementosArray = new string[N];
-                for (int i = 1; i < entradaArray.Length; i++)
-                {
-                    elementosArray[i - 1] = entradaArray[i];
-                }
-
-                int[] valores = Array.ConvertAll(elementosArray, s => int.Parse(s));
-
-                OrdenadorBS ordenador = new OrdenadorBS(valores);
-                ordenador.Ordenar();
-                string vencedor;
-                vencedor = ordenador.Trocas % 2 == 0 ? "Carlos" : "Marcelo";
-                Console.WriteLine(vencedor);
-
-                entrada = Console.ReadLine();
-                entradaArray = entrada.Split();
-                N = int.Parse(entradaArray[0]);
+                arr[k] = L[i];
+                i++;
             }
+            else
+            {
+                arr[k] = R[j];
+                j++;
+                Trocas += n1 - i;
+            }
+            k++;
+        }
+
+        
+        while (i < n1)
+        {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+      
+        while (j < n2)
+        {
+            arr[k] = R[j];
+            j++;
+            k++;
         }
     }
 
-    class OrdenadorBS
+  
+    void Sort(int[] arr, int l, int r)
     {
-        public int Trocas = 0;
-        public int[] Elementos;
-        public OrdenadorBS(int[] v)
+        if (l < r)
         {
-            Elementos = v;
+            int m = l + (r - l) / 2;
+           
+            Sort(arr, l, m);
+            Sort(arr, m + 1, r);
+
+            Merge(arr, l, m, r);
         }
-        public void Ordenar()
+    }
+
+    public static void Main(String[] args)
+    {
+        string entrada = Console.ReadLine();
+        string[] entradaArray = entrada.Split();
+        int N = int.Parse(entradaArray[0]);
+
+        while (N != 0)
         {
-            for(int i = Elementos.Length - 1; i > 0; i--)
+            string[] elementosArray = new string[N];
+            for (int i = 1; i < entradaArray.Length; i++)
             {
-                for(int j = 0; j < i; j++)
-                {
-                    if (Elementos[j] > Elementos[j + 1])
-                    {
-                        Troca(j, j + 1);
-                        Trocas++;
-                    }
-                }
-            } 
-        }
-        public void Troca(int indiceA, int indiceB)
-        {
-            int aux = Elementos[indiceA];
-            Elementos[indiceA] = Elementos[indiceB];
-            Elementos[indiceB] = aux;
-        }
-        public override string ToString()
-        {
-            return String.Join(" ",Array.ConvertAll(Elementos, i => i.ToString()));
+                elementosArray[i - 1] = entradaArray[i];
+            }
+
+            int[] valores = Array.ConvertAll(elementosArray, s => int.Parse(s));
+
+            MergeSort ordenator = new MergeSort();
+            ordenator.Sort(valores, 0, valores.Length - 1);
+            string vencedor;
+            vencedor = ordenator.Trocas % 2 == 0 ? "Carlos" : "Marcelo";
+            Console.WriteLine(vencedor);
+
+            entrada = Console.ReadLine();
+            entradaArray = entrada.Split();
+            N = int.Parse(entradaArray[0]);
+           
         }
     }
 }
