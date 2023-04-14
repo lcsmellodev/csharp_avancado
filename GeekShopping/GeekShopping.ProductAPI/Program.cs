@@ -17,7 +17,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var stringConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+string stringConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+
 builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(stringConnection, ServerVersion.AutoDetect(stringConnection)));
 IMapper mapper =  MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
